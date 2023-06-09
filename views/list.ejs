@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge 20</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>BREAD(Browse, Read, Edit, Delete)</h1>
+    <br />
+    <form class="form-group" action="" method="get">
+      <h2>Filters</h2>
+      <div>
+        <label for="id">ID</label>
+        <input type="checkbox" id="id" name="id1" value="id" />
+        <input type="number" name="id" />
+      </div>
+      <br />
+      <div>
+        <label for="string">String</label>
+        <input type="checkbox" id="string" name="string1" value="string" />
+        <input type="text" name="string" />
+      </div>
+      <br />
+      <div>
+        <label for="integer">Integer</label>
+        <input type="checkbox" id="integer" name="integer1" value="integer" />
+        <input type="number" name="integer" />
+      </div>
+      <br />
+      <div>
+        <label for="float">Float</label>
+        <input type="checkbox" id="float" name="float1" value="float" />
+        <input type="number" name="float" />
+      </div>
+      <br />
+      <div>
+        <label for="date">Date</label>
+        <input type="checkbox" id="date" name="date1" value="date" />
+        <input type="date" name="date" />
+      </div>
+      <br />
+      <div>
+        <label for="boolean">Boolean</label>
+        <input type="checkbox" id="boolean" name="boolean1" value="boolean" />
+        <select
+          type="boolean"
+          id="boolean"
+          name="boolean"
+          id="boolean"
+          name="boolean"
+        >
+          <option value="">Choose the boolean...</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <input type="submit" />
+      </div>
+      <br />
+      <div>
+        <input type="reset" />
+      </div>
+    </form>
+    <br />
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>String</th>
+          <th>Integer</th>
+          <th>Float</th>
+          <th>Date</th>
+          <th>Boolean</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach((item, index) => { %>
+        <tr>
+          <td><%= offset + index + 1 %></td>
+          <td><%= item.string %></td>
+          <td><%= item.integer %></td>
+          <td><%= item.float %></td>
+          <td><%= item.date %></td>
+          <td><%= item.boolean %></td>
+          <td>
+            <a href="/edit/<%= item.id %>"
+              ><button class="edit" type="button">Edit</button></a
+            >
+            <span></span
+            ><a href="/delete/<%= item.id %>"
+              ><button class="delete" type="button">Delete</button></a
+            >
+          </td>
+        </tr>
+        <%})%>
+      </tbody>
+    </table>
+    <br />
+    <div class="pagination">
+      <% if (page > 1) { %>
+      <a class="pagination__link" href="/?page=<%= page - 1 %>"
+        >&laquo; Previous</a
+      >
+      <% } %> <% for (let i = 1; i <= pages; i++) { %> <% if (page == i) { %>
+      <a
+        class="pagination__link pagination__link--active"
+        href="/?page=<%= i %>"
+        ><%= i %></a
+      >
+      <% } else { %>
+      <a class="pagination__link" href="/?page=<%= i %>"><%= i %></a>
+      <% } %> <% } %> <% if (page < pages) { %>
+      <a class="pagination__link" href="/?page=<%= page + 1 %>">Next &raquo;</a>
+      <% } %>
+    </div>
+
+    <span></span>
+    <a href="/add"><button class="add" type="button">Add</button></a>
+  </body>
+</html>

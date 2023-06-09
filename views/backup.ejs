@@ -1,0 +1,9 @@
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  <% for(let i = 1; i <= pages; i++){%>
+  <a class="<%= page == i ? 'active' : '' %>" href="/?page=<%= i %>"
+    ><%= i %></a
+  >
+  <%}%>
+  <a href="#">&raquo;</a>
+</div>
