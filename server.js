@@ -77,6 +77,7 @@ app.get("/", (req, res) => {
         offset,
         previousPage,
         nextPage,
+        query: req.query,
       });
     });
   });

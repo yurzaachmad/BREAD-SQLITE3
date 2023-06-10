@@ -14,47 +14,53 @@
       <h2>Filters</h2>
       <div>
         <label for="id">ID</label>
-        <input type="checkbox" id="id" name="id1" value="id" />
-        <input type="number" name="id" />
+        <input type="checkbox" id="id" name="id1" value="id" <% if (query.id) { %>checked<% } %>
+        <% if (!query.id) { %><% } %> />
+        <input type="number" name="id" value="<%= query.id%>" />
       </div>
       <br />
       <div>
         <label for="string">String</label>
-        <input type="checkbox" id="string" name="string1" value="string" />
-        <input type="text" name="string" />
+        <input type="checkbox" id="string" name="string1" value="string" <% if (query.string) { %>checked<% } %>
+        <% if (!query.string) { %><% } %> />
+        <input type="text" name="string" value="<%= query.string%>" />
       </div>
       <br />
       <div>
         <label for="integer">Integer</label>
-        <input type="checkbox" id="integer" name="integer1" value="integer" />
-        <input type="number" name="integer" />
+        <input type="checkbox" id="integer" name="integer1" value="integer" <% if (query.integer) { %>checked<% } %>
+        <% if (!query.integer) { %><% } %> />
+        <input type="number" name="integer" value="<%= query.integer%>" />
       </div>
       <br />
       <div>
         <label for="float">Float</label>
-        <input type="checkbox" id="float" name="float1" value="float" />
-        <input type="number" name="float" />
+        <input type="checkbox" id="float" name="float1" value="float" <% if (query.float) { %>checked<% } %>
+        <% if (!query.float) { %><% } %> />
+        <input type="number" name="float" value="<%= query.float%>" />
       </div>
       <br />
       <div>
         <label for="date">Date</label>
-        <input type="checkbox" id="date" name="date1" value="date" />
-        <input type="date" name="date" />
+        <input type="checkbox" id="date" name="date1" value="date"<% if (query.date) { %>checked<% } %>
+        <% if (!query.date) { %><% } %> />
+        <input type="date" name="date" value="<%= query.date%>" />
       </div>
       <br />
       <div>
         <label for="boolean">Boolean</label>
-        <input type="checkbox" id="boolean" name="boolean1" value="boolean" />
-        <select
-          type="boolean"
+        <input
+          type="checkbox"
           id="boolean"
-          name="boolean"
-          id="boolean"
-          name="boolean"
-        >
-          <option value="">Choose the boolean...</option>
-          <option value="true">True</option>
-          <option value="false">False</option>
+          name="boolean1"
+          value="true"
+          <% if (query.boolean) { %>checked<% } %>
+          <% if (!query.boolean) { %><% } %>
+        />
+        <select id="boolean" name="boolean">
+          <option value="" <% if (!query.boolean) { %>selected<% } %>>-- Select --</option>
+          <option value="true" <% if (query.boolean === 'true') { %>selected<% } %>>True</option>
+          <option value="false" <% if (query.boolean === 'false') { %>selected<% } %>>False</option>
         </select>
       </div>
       <br />
@@ -63,7 +69,7 @@
       </div>
       <br />
       <div>
-        <input type="reset" />
+        <a href="/"><button class="reset" type="button">Reset</button></a>
       </div>
     </form>
     <br />
