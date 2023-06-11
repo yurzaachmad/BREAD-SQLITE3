@@ -11,6 +11,7 @@
     <h1>BREAD(Browse, Read, Edit, Delete)</h1>
     <br />
     <form class="form-group" action="" method="get">
+      <input type="hidden" name="page" value="1">
       <h2>Filters</h2>
       <div>
         <label for="id">ID</label>
@@ -110,20 +111,14 @@
     <br />
     <div class="pagination">
       <% if (page > 1) { %>
-      <a class="pagination__link" href="/?page=<%= page - 1 %>"
-        >&laquo; Previous</a
-      >
-      <% } %> <% for (let i = 1; i <= pages; i++) { %> <% if (page == i) { %>
-      <a
-        class="pagination__link pagination__link--active"
-        href="/?page=<%= i %>"
-        ><%= i %></a
-      >
-      <% } else { %>
-      <a class="pagination__link" href="/?page=<%= i %>"><%= i %></a>
-      <% } %> <% } %> <% if (page < pages) { %>
-      <a class="pagination__link" href="/?page=<%= page + 1 %>">Next &raquo;</a>
-      <% } %>
+        <a class="pagination__link" href="<%= url.replace(`page=${page}`, `page=${page-1}`) %>">Previous</a>
+        <% } %>
+        <% for( let i = 1; i <= pages; i++ ) { %>
+          <a class="pagination__link pagination__link--active" href="<%= url.replace(`page=${page}`, `page=${i}`) %>" class="<%= page == i ? 'active' : '' %>" ><%=i %></a>
+        <% } %>
+        <% if (page < pages) { %>
+          <a class="pagination__link" href="<%= url.replace(`page=${parseInt(page)}`, `page=${parseInt(page)+1}`) %>">Next</a>
+        <% } %>
     </div>
 
     <span></span>

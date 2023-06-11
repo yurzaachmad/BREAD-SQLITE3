@@ -15,7 +15,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
+  const url = req.url == "/" ? "/?page=1" : req.url;
   const page = req.query.page || 1;
+
   const limit = 3;
   const offset = (page - 1) * limit;
 
@@ -68,16 +70,15 @@ app.get("/", (req, res) => {
       if (err) {
         console.log(err);
       }
-      const previousPage = parseInt(page) > 1 ? parseInt(page) - 1 : null;
-      const nextPage = parseInt(page) < totalPages ? parseInt(page) + 1 : null;
+      // const previousPage = parseInt(page) > 1 ? parseInt(page) - 1 : null;
+      // const nextPage = parseInt(page) < totalPages ? parseInt(page) + 1 : null;
       res.render("list", {
         data: rows,
         pages: totalPages,
-        page: parseInt(page),
+        page,
         offset,
-        previousPage,
-        nextPage,
         query: req.query,
+        url,
       });
     });
   });
