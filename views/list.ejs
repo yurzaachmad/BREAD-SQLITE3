@@ -43,9 +43,11 @@
       <br />
       <div>
         <label for="date">Date</label>
-        <input type="checkbox" id="date" name="date1" value="date"<% if (query.date) { %>checked<% } %>
-        <% if (!query.date) { %><% } %> />
-        <input type="date" name="date" value="<%= query.date%>" />
+        <input type="checkbox" id="date" name="date1" value="date"<% if (query.dateS) { %>checked<% } %>
+        <% if (!query.dateS) { %><% } %> />
+        <input type="date" name="dateS" value="<%= query.dateS%>" placeholder="start" />
+        <p>to</p>
+        <input type="date" name="dateE" value="<%= query.dateE%>" placeholder="end" />
       </div>
       <br />
       <div>

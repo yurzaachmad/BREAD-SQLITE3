@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   const params = [];
   const sqlsearch = [];
 
-  if (req.query.id && req.body.id1) {
+  if (req.query.id && req.query.id1) {
     params.push(req.query.id);
     sqlsearch.push(`id like '%${req.query.id}%'`);
   }
@@ -40,19 +40,22 @@ app.get("/", (req, res) => {
     params.push(req.query.float);
     sqlsearch.push(`float like '%${req.query.float}%'`);
   }
-  if (req.query.date && req.query.date1) {
-    params.push(req.query.date);
-    sqlsearch.push(`date like '%${req.query.date}%'`);
+  if (req.query.dateS && req.query.date1) {
+    params.push(req.query.dateS);
+    params.push(req.query.dateE);
+    sqlsearch.push(
+      `date between '${req.query.dateS}' and '${req.query.dateE}'`
+    );
   }
   if (req.query.boolean && req.query.boolean1) {
     params.push(req.query.boolean);
     sqlsearch.push(`boolean like '%${req.query.boolean}%'`);
   }
-
   let sql = "select count(*) as count from bread";
   if (params.length > 0) {
     sql += ` where ${sqlsearch.join(" and ")}`;
   }
+  // console.log(sql);
   db.all(sql, (err, countData) => {
     if (err) {
       console.log(err);
@@ -70,8 +73,7 @@ app.get("/", (req, res) => {
       if (err) {
         console.log(err);
       }
-      // const previousPage = parseInt(page) > 1 ? parseInt(page) - 1 : null;
-      // const nextPage = parseInt(page) < totalPages ? parseInt(page) + 1 : null;
+      // console.log(query);
       res.render("list", {
         data: rows,
         pages: totalPages,
